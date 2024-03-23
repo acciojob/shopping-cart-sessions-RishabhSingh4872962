@@ -12,6 +12,7 @@ const products = [
 // DOM elements
 const productList = document.getElementById("product-list");
 const cartList = document.getElementById("cart-list");
+const clearCartBtn = document.getElementById("clear-cart-btn");
 
 // Render product list
 function renderProducts() {
@@ -22,26 +23,31 @@ function renderProducts() {
   });
 }
 
-let cart=[]
 // Render cart list
-function renderCart() {}
+function renderCart() {
+		
+}
 
 // Add item to cart
 function addToCart(productId) {
-	let productObj=products.find((obj)=>obj.id==productId)
-	cart.push(productObj);
-	console.log(cart)
+	let product=products.find((obj)=>obj.id==productId)
+	const li=document.createElement("li");
+				li.innerHTML=`${product.name} - $${product.price} <button data-id="${product.id}" onclick="removeFromCart(${product.id})">Remove from Cart</button>`
+				cartList.appendChild(li);
+	
 }
 
 // Remove item from cart
 function removeFromCart(productId) {
-	
-	cart.splice(product.findIndex((ele)=>ele.id==productId),1);
-	console.log(cart)
+	(this.event.target.parentElement.remove())
 }
 
 // Clear cart
-function clearCart() {}
+clearCartBtn.addEventListener("click",clearCart)
+function clearCart() {
+	cartList.innerHTML=""
+	console.log(cartList)
+}
 
 // Initial render
 renderProducts();
